@@ -9,6 +9,7 @@ function renderEditor() {
 
     let addTask = () => {
         if (inputEl.value.length === 0) {
+            alert("待办事项不能为空！")
             return;//可增加警告
 
         }
@@ -42,12 +43,9 @@ function renderEditor() {
 }
 
 function renderTaskItems() {
-    console.log("render")
     let itemsEl = document.querySelector("#default-todo-panel .todo-items");
 
     itemsEl.querySelectorAll("div").forEach((node) => node.remove());
-
-
 
     for (let i = 0; i < tasks.length; i++) {
         let task = tasks[i];
@@ -76,7 +74,7 @@ function renderTaskItems() {
         titleEl.innerText = task.title;
         itemEl.append(titleEl);
 
-        let ctrlbarEl = renderTaskCtrlBar(tasks,i);
+        let ctrlbarEl = renderTaskCtrlBar(tasks, i);
 
         itemEl.append(ctrlbarEl);
 
@@ -84,25 +82,43 @@ function renderTaskItems() {
     }
 }
 
-function renderTaskCtrlBar(tasks,taskIdx) {
+function renderTaskCtrlBar(tasks, taskIdx) {
     let ctrlbarEl = document.createElement("div");
     ctrlbarEl.className = "ctrlbar";
 
     let upEl = document.createElement("button");
-    if (taskIdx ===0){
+
+    //开头箭头停用
+    if (taskIdx === 0) {
         upEl.disabled = true;
     }
     upEl.innerText = "⇡";
     upEl.onclick = () => {
-        ///
+        //实现向上移动
+        tasks.splice(taskIdx - 1, 0, tasks[taskIdx]);
+        tasks.splice(taskIdx + 1, 1);
+
+        //刷新
+        renderTaskItems();
     };
     ctrlbarEl.append(upEl);
 
 
     let downEl = document.createElement("button");
+    console.log(taskIdx.length)
+    //末尾箭头停用
+    if (taskIdx === (tasks.length - 1)) {
+        downEl.disabled = true;
+
+    }
     downEl.innerText = "⇣";
     downEl.onclick = () => {
-        ///
+        //实现向下移动
+        tasks.splice(taskIdx + 2, 0, tasks[taskIdx]);
+        tasks.splice(taskIdx, 1);
+
+        //刷新
+        renderTaskItems();
     };
     ctrlbarEl.append(downEl);
 
