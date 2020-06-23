@@ -81,13 +81,49 @@ function renderTaskItems() {
         itemsEl.append(itemEl);
     }
 }
+var a = 1;
+var vbtnValue = "☆"
 
 function renderTaskCtrlBar(tasks, taskIdx) {
     let ctrlbarEl = document.createElement("div");
     ctrlbarEl.className = "ctrlbar";
 
-    let upEl = document.createElement("button");
 
+    let vipEl = document.createElement("button");
+    vipEl.className = "vipbtn";
+    vipEl.innerText = vbtnValue;
+    vipEl.onclick = () => {
+        if (a === 1) {
+            vbtnValue = "★"
+            vipEl.innerText = vbtnValue;
+            a = a + 1;
+        } else {
+            vbtnValue = "☆"
+            vipEl.innerText = vbtnValue;
+            a = 1;
+        }
+
+
+        console.log(vipEl.innerText);
+
+        //if(vipEl.innerText === "⭑") {
+        //vipEl.innerText = "⭒";
+        //}
+        renderTaskItems();
+
+
+    }
+
+
+
+    ctrlbarEl.append(vipEl);
+
+
+
+
+
+
+    let upEl = document.createElement("button");
     //开头箭头停用
     if (taskIdx === 0) {
         upEl.disabled = true;
@@ -105,7 +141,6 @@ function renderTaskCtrlBar(tasks, taskIdx) {
 
 
     let downEl = document.createElement("button");
-    console.log(taskIdx.length)
     //末尾箭头停用
     if (taskIdx === (tasks.length - 1)) {
         downEl.disabled = true;

@@ -52,6 +52,8 @@ body{
     cursor: pointer;
 }
 
+
+
 .todo-items .ctrlbar > button:disabled {
     color:grey;
     /*cursor: pointer;*/
@@ -65,7 +67,9 @@ body{
     font-weight: bolder;
 }
 
-
+.vipbtn > button{
+    font-size: 5em;
+}
 .task.done > label {
     text-decoration: line-through;
 }
