@@ -9,6 +9,14 @@ h1{
     font-size: 1.5em;
     text-shadow: 4px 5px 6px #1e5bdc85;
 }
+h2{
+    font-size: 1.5em;
+    color: grey;
+}
+.tipText{
+    font-size: em;
+    color: grey;
+}
 
 .todo-panel{
 
@@ -37,6 +45,29 @@ h1{
 .todo-items {
     padding: 5px 20px;
 }
+.todo-items-tip {
+    padding: 200px 20px;
+    padding-bottom: 00px;
+}
+.todo-items-tip .tip > input {
+    width: 1.5em;
+    height: 1.5em;
+}
+.todo-items-tip > .tip {
+    display: flex;
+    align-items: center;
+    background-color: lavender;
+    
+}
+.todo-items-tip .ctrlbar > button{
+    font-size: 1.3em;
+    border: none;
+    background: none;
+    color: blue;
+    cursor: pointer;
+}
+
+
 
 .todo-items > .task {
     display: flex;

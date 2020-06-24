@@ -43,6 +43,7 @@ function renderTaskItems() {
 
     for (let i = 0; i < tasks.length; i++) {
         let task = tasks[i];
+
         let itemEl = document.createElement("div");
         itemEl.className = "task";
         if (i%2 === 1){
