@@ -2,23 +2,17 @@ let tasks = [];// {title:"dddddd"}
 function renderEditor() {
     let inputEl = document.querySelector("#default-todo-panel .todo-editor > input");
 
-    //inputEl.onchange = (e) => {
-    //   console.log("text" , e.target.value)
-    //}
-
-
     let addTask = () => {
         if (inputEl.value.length === 0) {
-            alert("待办事项不能为空！")
-            return;//可增加警告
-
+            //可增加警告
+            alert("待办事项不能为空！");
+            return;
         }
         let newTask = {
             title: inputEl.value,
             done: false,
         };
         inputEl.value = ""
-
 
         tasks.push(newTask);
 
@@ -51,7 +45,15 @@ function renderTaskItems() {
         let task = tasks[i];
         let itemEl = document.createElement("div");
         itemEl.className = "task";
+        if (i%2 === 1){
+            itemEl.classList.add("a");
+            console.log("ffffffffffff");
+            console.log(i)
+        }
 
+
+
+        //已完成按钮与功能实现
         let doneEl = document.createElement("input");
         doneEl.type = "checkbox";
         doneEl.checked = task.done;
@@ -61,7 +63,6 @@ function renderTaskItems() {
             itemEl.classList.remove("done")
         }
         doneEl.onchange = (e) => {
-            console.log("onchange:", e)
 
             task.done = e.target.checked;
             if (task.done) {
@@ -72,35 +73,32 @@ function renderTaskItems() {
         }
         itemEl.append(doneEl);
 
-        let vipEl = document.createElement("input");
-        vipEl.type = "checkbox";
-        vipEl.checked = task.done;
-        if (task.done) {
-            console.log(1);
-            itemEl.classList.add("vip");
-        } else {
-            console.log(2);
-            itemEl.classList.remove("vip")
-        }
-        vipEl.onchange = (e) => {
-            console.log("onchange:", e)
-
-            task.done = e.target.checked;
-            if (task.done) {
-                console.log(3);
-                itemEl.classList.add("vip");
-            } else {
-                console.log(4);
-                itemEl.classList.remove("vip")
-            }
-        }
-        itemEl.append(vipEl);
 
 
 
         let titleEl = document.createElement("label");
         titleEl.innerText = task.title;
         itemEl.append(titleEl);
+
+        //重要性按钮实现
+        let vipEl = document.createElement("input");
+        vipEl.type = "checkbox";
+        vipEl.checked = task.done;
+        if (task.done) {
+            itemEl.classList.add("vip");
+        } else {
+            itemEl.classList.remove("vip")
+        }
+        vipEl.onchange = (e) => {
+            task.done = e.target.checked;
+            if (task.done) {
+                itemEl.classList.add("vip");
+            } else {
+                itemEl.classList.remove("vip")
+            }
+        }
+        itemEl.append(vipEl);
+
 
         let ctrlbarEl = renderTaskCtrlBar(tasks, i);
 
@@ -110,95 +108,15 @@ function renderTaskItems() {
     }
 
     
+
+    
 }
-var a = 1;
-var vbtnValue = "☆";
 
 function renderTaskCtrlBar(tasks, taskIdx) {
     let ctrlbarEl = document.createElement("div");
     ctrlbarEl.className = "ctrlbar";
     
-
-    // for (let i = 0; i < tasks.length; i++) {
-    //     let vipEl = document.createElement("input");
-    //     vipEl.className="CB"
-    //     let task = tasks[i];
-    //     vipEl.type = "checkbox";
-    //     vipEl.checked = task.done;
-    //     if (task.done) {
-    //         console.log(0);
-    //         itemEli.classList.add("vip");
-    //     } else {
-    //         console.log(1);
-    //         itemEl.classList.remove("vip")
-    //     }
-    //     vipEl.onchange = (e) => {
-    //         console.log("onchange:", e)
-    //         task.done = e.target.checked;
-    //         if (task.done) {
-    //             console.log(3);
-    //             itemEl.classList.add("vip");
-
-    //         } else {
-    //             console.log(4);
-    //             itemEl.classList.remove("vip")
-
-    //         }
-    //     }
-    //     ctrlbarEl.append(vipEl);
-
-
-
-    // }
-
-
-
-
-
-
-    //() => {
-    // console.log(vipEl.id);
-    // console.log(taskIdx);
-    // if (vipEl.id === taskIdx) {
-    //     console.log(1);
-    //     if (a === 1) {
-    //         vipEl.className = "vipTure";
-    //         console.log(222);//
-    //         a = 2;
-    //     } else {
-    //         vipEl.className = "vipFalse";
-    //         a = 1;
-    //     }
-    //     if (vipEl.className === "vipTure") {
-    //         console.log(0)
-    //         vbtnValue = "★"
-    //         vipEl.innerText = vbtnValue;
-    //     } else {
-    //         vbtnValue = "☆"
-    //         vipEl.innerText = vbtnValue;
-    //     }
-    // }
-
-    //     console.log(vipEl.id);
-    //     console.log(taskIdx);
-    //     console.log(vipEl)
-
-
-    //renderTaskItems();
-    // }
-    //ctrlbarEl.append(vipEl);
-
-
-
-
-
-
-
-
-
-
-
-
+    //向上移动按钮
     let upEl = document.createElement("button");
     //开头箭头停用
     if (taskIdx === 0) {
@@ -215,7 +133,7 @@ function renderTaskCtrlBar(tasks, taskIdx) {
     };
     ctrlbarEl.append(upEl);
 
-
+    //向上移动按钮
     let downEl = document.createElement("button");
     //末尾箭头停用
     if (taskIdx === (tasks.length - 1)) {
@@ -233,6 +151,7 @@ function renderTaskCtrlBar(tasks, taskIdx) {
     };
     ctrlbarEl.append(downEl);
 
+    //删除按钮
     let cancelEl = document.createElement("button");
     cancelEl.innerText = "x";
     cancelEl.onclick = () => {

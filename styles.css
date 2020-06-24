@@ -41,7 +41,17 @@ h1{
 .todo-items > .task {
     display: flex;
     align-items: center;
+    background-color: lavender;
+    
 }
+.todo-items > .task.a {
+    display: flex;
+    align-items: center;
+    background-color: blanchedalmond;
+    
+}
+
+
 
 .todo-items > .task > input{
     width: 1.5em;
