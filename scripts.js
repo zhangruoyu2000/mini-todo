@@ -61,6 +61,8 @@ function renderTaskItems() {
             itemEl.classList.remove("done")
         }
         doneEl.onchange = (e) => {
+            console.log("onchange:", e)
+
             task.done = e.target.checked;
             if (task.done) {
                 itemEl.classList.add("done");
@@ -69,6 +71,32 @@ function renderTaskItems() {
             }
         }
         itemEl.append(doneEl);
+
+        let vipEl = document.createElement("input");
+        vipEl.type = "checkbox";
+        vipEl.checked = task.done;
+        if (task.done) {
+            console.log(1);
+            itemEl.classList.add("vip");
+        } else {
+            console.log(2);
+            itemEl.classList.remove("vip")
+        }
+        vipEl.onchange = (e) => {
+            console.log("onchange:", e)
+
+            task.done = e.target.checked;
+            if (task.done) {
+                console.log(3);
+                itemEl.classList.add("vip");
+            } else {
+                console.log(4);
+                itemEl.classList.remove("vip")
+            }
+        }
+        itemEl.append(vipEl);
+
+
 
         let titleEl = document.createElement("label");
         titleEl.innerText = task.title;
@@ -80,43 +108,91 @@ function renderTaskItems() {
 
         itemsEl.append(itemEl);
     }
+
+    
 }
 var a = 1;
-var vbtnValue = "☆"
+var vbtnValue = "☆";
 
 function renderTaskCtrlBar(tasks, taskIdx) {
     let ctrlbarEl = document.createElement("div");
     ctrlbarEl.className = "ctrlbar";
+    
+
+    // for (let i = 0; i < tasks.length; i++) {
+    //     let vipEl = document.createElement("input");
+    //     vipEl.className="CB"
+    //     let task = tasks[i];
+    //     vipEl.type = "checkbox";
+    //     vipEl.checked = task.done;
+    //     if (task.done) {
+    //         console.log(0);
+    //         itemEli.classList.add("vip");
+    //     } else {
+    //         console.log(1);
+    //         itemEl.classList.remove("vip")
+    //     }
+    //     vipEl.onchange = (e) => {
+    //         console.log("onchange:", e)
+    //         task.done = e.target.checked;
+    //         if (task.done) {
+    //             console.log(3);
+    //             itemEl.classList.add("vip");
+
+    //         } else {
+    //             console.log(4);
+    //             itemEl.classList.remove("vip")
+
+    //         }
+    //     }
+    //     ctrlbarEl.append(vipEl);
 
 
-    let vipEl = document.createElement("button");
-    vipEl.className = "vipbtn";
-    vipEl.innerText = vbtnValue;
-    vipEl.onclick = () => {
-        if (a === 1) {
-            vbtnValue = "★"
-            vipEl.innerText = vbtnValue;
-            a = a + 1;
-        } else {
-            vbtnValue = "☆"
-            vipEl.innerText = vbtnValue;
-            a = 1;
-        }
 
-
-        console.log(vipEl.innerText);
-
-        //if(vipEl.innerText === "⭑") {
-        //vipEl.innerText = "⭒";
-        //}
-        renderTaskItems();
-
-
-    }
+    // }
 
 
 
-    ctrlbarEl.append(vipEl);
+
+
+
+    //() => {
+    // console.log(vipEl.id);
+    // console.log(taskIdx);
+    // if (vipEl.id === taskIdx) {
+    //     console.log(1);
+    //     if (a === 1) {
+    //         vipEl.className = "vipTure";
+    //         console.log(222);//
+    //         a = 2;
+    //     } else {
+    //         vipEl.className = "vipFalse";
+    //         a = 1;
+    //     }
+    //     if (vipEl.className === "vipTure") {
+    //         console.log(0)
+    //         vbtnValue = "★"
+    //         vipEl.innerText = vbtnValue;
+    //     } else {
+    //         vbtnValue = "☆"
+    //         vipEl.innerText = vbtnValue;
+    //     }
+    // }
+
+    //     console.log(vipEl.id);
+    //     console.log(taskIdx);
+    //     console.log(vipEl)
+
+
+    //renderTaskItems();
+    // }
+    //ctrlbarEl.append(vipEl);
+
+
+
+
+
+
 
 
 
